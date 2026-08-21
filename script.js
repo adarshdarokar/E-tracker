@@ -25,6 +25,14 @@ function displayExpenses() {
 
 }
 
+  function calculateTotal(){
+    const total = expenses.reduce(function(sum, expense){
+        return sum + expense.amount
+    }, 0)
+
+    balance = -total;
+    balanceElement.textContent = `₹${balance}`
+  }
 
 form.addEventListener("submit", function (event) {
 
@@ -41,5 +49,6 @@ form.addEventListener("submit", function (event) {
     expenses.push(expense);
 
     displayExpenses();
+    calculateTotal()
 
 });
