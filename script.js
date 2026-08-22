@@ -1,6 +1,6 @@
 let balance = 0;
 
-const expenses = [];
+let expenses = [];
 
 const balanceElement = document.getElementById("balance");
 const form = document.getElementById("expenseForm");
@@ -8,47 +8,53 @@ const titleInput = document.getElementById("title");
 const amountInput = document.getElementById("amount");
 const expenseList = document.getElementById("expenseList");
 
-
 function displayExpenses() {
+  expenseList.innerHTML = "";
 
-    expenseList.innerHTML = "";
+  expenses.forEach(function (expense, index) {
+    const li = document.createElement("li");
 
-    expenses.forEach(function (expense) {
+    li.innerHTML = `${expense.title} - ₹${expense.amount}
+         <button data-index = "${index}">Delete</button>
+        `;
 
-        const li = document.createElement("li");
-
-        li.textContent = `${expense.title} - ₹${expense.amount}`;
-
-        expenseList.appendChild(li);
-
-    });
-
+    expenseList.appendChild(li);
+  });
 }
 
-  function calculateTotal(){
-    const total = expenses.reduce(function(sum, expense){
-        return sum + expense.amount
-    }, 0)
+function calculateTotal() {
+  const total = expenses.reduce(function (sum, expense) {
+    return sum + expense.amount;
+  }, 0);
 
-    balance = -total;
-    balanceElement.textContent = `₹${balance}`
-  }
+  balance = -total;
+  balanceElement.textContent = `₹${balance}`;
+}
 
 form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    event.preventDefault();
+  const title = titleInput.value;
+  const amount = Number(amountInput.value);
 
-    const title = titleInput.value;
-    const amount = Number(amountInput.value);
+  const expense = {
+    title: title,
+    amount: amount,
+  };
 
-    const expense = {
-        title: title,
-        amount: amount
-    };
+  expenses.push(expense);
 
-    expenses.push(expense);
+  displayExpenses();
+  calculateTotal();
+});
 
+expenseList.addEventListener("click", function (event) {
+  if (event.target.tagName === "BUTTON") {
+    const index = Number(event.target.dataset.index);
+    expenses = expenses.filter(function (expense, expenseIndex) {
+      return expenseIndex !== index;
+    });
     displayExpenses();
-    calculateTotal()
-
+    calculateTotal();
+  }
 });
