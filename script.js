@@ -1,6 +1,7 @@
 let balance = 0;
 
 let expenses = [];
+let editingIndex = null;
 
 const balanceElement = document.getElementById("balance");
 const form = document.getElementById("expenseForm");
@@ -49,6 +50,9 @@ form.addEventListener("submit", function (event) {
 });
 
 expenseList.addEventListener("click", function (event) {
+
+
+  
   if (event.target.tagName === "BUTTON") {
     const index = Number(event.target.dataset.index);
     expenses = expenses.filter(function (expense, expenseIndex) {
