@@ -4,150 +4,191 @@
     box-sizing: border-box;
 }
 
+:root {
+    --espresso: #2b1b14;
+    --coffee: #4b2e22;
+    --mocha: #76533f;
+    --latte: #b99678;
+    --cream: #f8f1e8;
+    --paper: #fffdf9;
+    --sand: #e7d7c6;
+    --line: #eadfd3;
+    --muted: #927d6c;
+}
+
 body {
-    font-family: Arial, sans-serif;
     min-height: 100vh;
-    background: #f1e7db;
-    color: #3b2418;
-    padding: 50px 20px;
+    font-family: Arial, sans-serif;
+    background: var(--cream);
+    color: var(--espresso);
+    padding: 35px 20px;
 }
 
 .container {
     width: 100%;
-    max-width: 760px;
-    margin: 0 auto;
+    max-width: 820px;
+    margin: auto;
 }
 
-/* Header */
+
+/* HEADER */
 
 h1 {
-    color: #3a2419;
-    font-size: 34px;
-    font-weight: 700;
-    letter-spacing: -1px;
+    display: inline-block;
+    color: var(--espresso);
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
     margin-bottom: 28px;
 }
 
-/* Balance */
+h1::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin-top: 8px;
+    border-radius: 20px;
+    background: var(--latte);
+}
+
+
+/* BALANCE */
 
 .balance-card {
     position: relative;
     overflow: hidden;
-    background: #fffaf3;
+    min-height: 190px;
     padding: 32px;
-    border: 1px solid #ddcbbb;
-    border-radius: 16px;
-    margin-bottom: 22px;
-    box-shadow: 0 12px 30px rgba(74, 47, 34, 0.08);
+    margin-bottom: 18px;
+    border-radius: 24px;
+    background: var(--espresso);
+    color: white;
+    box-shadow: 0 20px 45px rgba(43, 27, 20, 0.18);
+}
+
+.balance-card::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -70px;
+    top: -100px;
+    border-radius: 50%;
+    border: 35px solid rgba(255, 255, 255, 0.05);
 }
 
 .balance-card::after {
     content: "";
     position: absolute;
-    width: 150px;
-    height: 150px;
-    right: -55px;
-    top: -65px;
+    width: 130px;
+    height: 130px;
+    right: 60px;
+    bottom: -85px;
     border-radius: 50%;
-    background: #ead8c5;
-    opacity: 0.45;
+    background: rgba(185, 150, 120, 0.15);
 }
 
 .balance-card p {
     position: relative;
-    z-index: 1;
-    color: #8c705c;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+    z-index: 2;
+    margin-bottom: 12px;
+    color: #cdb9a7;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 10px;
 }
 
 .balance-card h2 {
     position: relative;
-    z-index: 1;
-    color: #4a2f22;
-    font-size: 38px;
+    z-index: 2;
+    color: #fffaf4;
+    font-size: 44px;
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
 }
 
-/* Form */
+
+/* FORM */
 
 #expenseForm {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 180px auto;
     gap: 10px;
+    padding: 12px;
     margin-bottom: 22px;
+    border: 1px solid var(--sand);
+    border-radius: 16px;
+    background: rgba(255, 253, 249, 0.8);
 }
 
 #expenseForm input {
-    flex: 1;
-    min-width: 0;
+    width: 100%;
     padding: 14px 16px;
-    background: #fffaf3;
-    color: #3b2418;
-    border: 1px solid #d3bda7;
-    border-radius: 9px;
+    border: 1px solid transparent;
+    border-radius: 10px;
     outline: none;
-    font-size: 15px;
+    background: #f4ebe1;
+    color: var(--espresso);
+    font-size: 14px;
     transition: 0.2s ease;
 }
 
 #expenseForm input::placeholder {
-    color: #aa927e;
+    color: var(--muted);
 }
 
 #expenseForm input:focus {
-    border-color: #765139;
-    box-shadow: 0 0 0 3px rgba(118, 81, 57, 0.1);
+    background: var(--paper);
+    border-color: var(--latte);
+    box-shadow: 0 0 0 3px rgba(185, 150, 120, 0.12);
 }
 
 #expenseForm button {
-    padding: 14px 22px;
+    padding: 0 22px;
     border: none;
-    border-radius: 9px;
-    background: #563727;
-    color: #fffaf3;
+    border-radius: 10px;
+    background: var(--coffee);
+    color: #fffaf4;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
     transition: 0.2s ease;
-    box-shadow: 0 5px 12px rgba(86, 55, 39, 0.18);
 }
 
 #expenseForm button:hover {
-    background: #43291d;
-    transform: translateY(-1px);
+    background: var(--espresso);
+    transform: translateY(-2px);
 }
 
 #expenseForm button:active {
     transform: translateY(0);
 }
 
-/* Transactions */
+
+/* TRANSACTIONS */
 
 .transactions {
-    background: #fffaf3;
     padding: 26px;
-    border: 1px solid #ddcbbb;
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgba(74, 47, 34, 0.07);
+    border: 1px solid var(--sand);
+    border-radius: 20px;
+    background: var(--paper);
+    box-shadow: 0 12px 35px rgba(76, 51, 37, 0.07);
 }
 
 .transactions h2 {
-    color: #4a2f22;
+    color: var(--espresso);
     font-size: 21px;
-    font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 18px;
 }
 
 #expenseList {
     list-style: none;
-    margin-top: 8px;
 }
 
-/* Transaction row */
+
+/* TRANSACTION */
 
 #expenseList li {
     display: flex;
@@ -155,8 +196,8 @@ h1 {
     justify-content: space-between;
     gap: 15px;
     padding: 17px 4px;
-    color: #5a4030;
-    border-bottom: 1px solid #eadbc9;
+    border-bottom: 1px dashed var(--line);
+    color: var(--coffee);
     font-size: 15px;
 }
 
@@ -164,67 +205,69 @@ h1 {
     border-bottom: none;
 }
 
-/* Buttons inside transactions */
+
+/* BUTTONS */
 
 #expenseList button {
-    border: 1px solid #d3bda7;
-    background: #f2e6d8;
-    color: #60412f;
-    padding: 7px 13px;
-    border-radius: 7px;
+    padding: 7px 12px;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    background: #f5ebe1;
+    color: var(--coffee);
+    font-size: 12px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
     transition: 0.2s ease;
 }
 
 #expenseList button:hover {
-    background: #e5d1bd;
-    border-color: #c5a88e;
+    background: var(--sand);
+    border-color: var(--latte);
+    transform: translateY(-1px);
 }
 
 #expenseList button:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
-/* Responsive */
 
-@media (max-width: 600px) {
+/* MOBILE */
+
+@media (max-width: 650px) {
 
     body {
-        padding: 28px 12px;
+        padding: 24px 12px;
     }
 
     h1 {
-        font-size: 28px;
+        font-size: 30px;
         margin-bottom: 22px;
     }
 
     .balance-card {
+        min-height: 165px;
         padding: 25px;
-        border-radius: 14px;
+        border-radius: 20px;
     }
 
     .balance-card h2 {
-        font-size: 32px;
+        font-size: 36px;
     }
 
     #expenseForm {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        padding: 10px;
     }
 
     #expenseForm input,
-    #expenseForm > button {
-        width: 100%;
-    }
-
     #expenseForm button {
-        padding: 14px;
+        width: 100%;
+        min-height: 46px;
     }
 
     .transactions {
         padding: 20px;
-        border-radius: 14px;
+        border-radius: 18px;
     }
 
     #expenseList li {
