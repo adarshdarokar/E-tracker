@@ -24,9 +24,9 @@ function displayExpenses() {
         const li = document.createElement("li");
 
         li.innerHTML = `${expense.title} - ₹${expense.amount}
-            
+
             <button data-index="${index}">Delete</button>
-            
+
         `;
 
         expenseList.appendChild(li);
@@ -55,9 +55,13 @@ form.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
-    const title = titleInput.value;
+    const title = titleInput.value.trim();
 
     const amount = Number(amountInput.value);
+
+    if (title === "" || amount <= 0) {
+        return;
+    }
 
     const expense = {
 
