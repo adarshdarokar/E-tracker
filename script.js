@@ -59,15 +59,17 @@ form.addEventListener("submit", function (event) {
 
     const amount = Number(amountInput.value);
 
-    if (title === "" || amount <= 0) {
+    if (title === "" || amount <= 0 || !Number.isFinite(amount)) {
+
         return;
+
     }
 
     const expense = {
 
         title: title,
 
-        amount: amount,
+        amount: Number(amount.toFixed(2)),
 
     };
 
