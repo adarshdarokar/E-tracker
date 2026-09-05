@@ -15,6 +15,23 @@ const amountInput = document.getElementById("amount");
 const expenseList = document.getElementById("expenseList");
 
 
+// ==============================
+// CLEAR ALL BUTTON
+// ==============================
+
+const clearAllButton = document.createElement("button");
+
+clearAllButton.textContent = "Clear All";
+
+clearAllButton.type = "button";
+
+expenseList.parentElement.appendChild(clearAllButton);
+
+
+// ==============================
+// DISPLAY EXPENSES
+// ==============================
+
 function displayExpenses() {
 
     expenseList.innerHTML = "";
@@ -23,10 +40,16 @@ function displayExpenses() {
 
         const li = document.createElement("li");
 
-        li.innerHTML = `${expense.title} - ₹${expense.amount}
+        li.innerHTML = `
+            ${expense.title} - ₹${expense.amount}
 
-            <button data-index="${index}">Delete</button>
+            <button data-index="${index}" data-action="edit">
+                Edit
+            </button>
 
+            <button data-index="${index}" data-action="delete">
+                Delete
+            </button>
         `;
 
         expenseList.appendChild(li);
@@ -35,6 +58,10 @@ function displayExpenses() {
 
 }
 
+
+// ==============================
+// CALCULATE TOTAL
+// ==============================
 
 function calculateTotal() {
 
@@ -51,6 +78,10 @@ function calculateTotal() {
 }
 
 
+// ==============================
+// ADD / UPDATE EXPENSE
+// ==============================
+
 form.addEventListener("submit", function (event) {
 
     event.preventDefault();
@@ -65,6 +96,7 @@ form.addEventListener("submit", function (event) {
 
     }
 
+
     const expense = {
 
         title: title,
@@ -73,7 +105,23 @@ form.addEventListener("submit", function (event) {
 
     };
 
-    expenses.push(expense);
+
+    // EDIT MODE
+    if (editingIndex !== null) {
+
+        expenses[editingIndex] = expense;
+
+        editingIndex = null;
+
+    }
+
+    // ADD MODE
+    else {
+
+        expenses.push(expense);
+
+    }
+
 
     displayExpenses();
 
@@ -84,11 +132,42 @@ form.addEventListener("submit", function (event) {
 });
 
 
+// ==============================
+// EDIT + DELETE
+// ==============================
+
 expenseList.addEventListener("click", function (event) {
 
-    if (event.target.tagName === "BUTTON") {
+    if (event.target.tagName !== "BUTTON") {
 
-        const index = Number(event.target.dataset.index);
+        return;
+
+    }
+
+
+    const index = Number(event.target.dataset.index);
+
+    const action = event.target.dataset.action;
+
+
+    // EDIT
+    if (action === "edit") {
+
+        const expense = expenses[index];
+
+        titleInput.value = expense.title;
+
+        amountInput.value = expense.amount;
+
+        editingIndex = index;
+
+        titleInput.focus();
+
+    }
+
+
+    // DELETE
+    if (action === "delete") {
 
         expenses = expenses.filter(function (expense, expenseIndex) {
 
@@ -99,6 +178,41 @@ expenseList.addEventListener("click", function (event) {
         displayExpenses();
 
         calculateTotal();
+
+    }
+
+});
+
+
+// ==============================
+// CLEAR ALL
+// ==============================
+
+clearAllButton.addEventListener("click", function () {
+
+    if (expenses.length === 0) {
+
+        return;
+
+    }
+
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete all expenses?"
+    );
+
+
+    if (confirmDelete) {
+
+        expenses = [];
+
+        editingIndex = null;
+
+        displayExpenses();
+
+        calculateTotal();
+
+        form.reset();
 
     }
 
