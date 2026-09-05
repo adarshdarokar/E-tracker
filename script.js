@@ -29,6 +29,37 @@ expenseList.parentElement.appendChild(clearAllButton);
 
 
 // ==============================
+// SEARCH INPUT
+// ==============================
+
+const searchInput = document.createElement("input");
+
+searchInput.type = "text";
+
+searchInput.placeholder = "Search expenses...";
+
+expenseList.parentElement.insertBefore(searchInput, expenseList);
+
+
+// ==============================
+// EXPENSE SUMMARY
+// ==============================
+
+const summaryElement = document.createElement("div");
+
+summaryElement.innerHTML = `
+    <p>Total Expenses: <span id="expenseCount">0</span></p>
+    <p>Total Spent: ₹<span id="totalSpent">0</span></p>
+`;
+
+expenseList.parentElement.appendChild(summaryElement);
+
+const expenseCountElement = document.getElementById("expenseCount");
+
+const totalSpentElement = document.getElementById("totalSpent");
+
+
+// ==============================
 // DISPLAY EXPENSES
 // ==============================
 
@@ -36,7 +67,15 @@ function displayExpenses() {
 
     expenseList.innerHTML = "";
 
+    const searchText = searchInput.value.toLowerCase().trim();
+
     expenses.forEach(function (expense, index) {
+
+        if (!expense.title.toLowerCase().includes(searchText)) {
+
+            return;
+
+        }
 
         const li = document.createElement("li");
 
@@ -79,6 +118,25 @@ function calculateTotal() {
 
 
 // ==============================
+// UPDATE SUMMARY
+// ==============================
+
+function updateSummary() {
+
+    const total = expenses.reduce(function (sum, expense) {
+
+        return sum + expense.amount;
+
+    }, 0);
+
+    expenseCountElement.textContent = expenses.length;
+
+    totalSpentElement.textContent = total.toFixed(2);
+
+}
+
+
+// ==============================
 // ADD / UPDATE EXPENSE
 // ==============================
 
@@ -89,6 +147,9 @@ form.addEventListener("submit", function (event) {
     const title = titleInput.value.trim();
 
     const amount = Number(amountInput.value);
+
+
+    // VALIDATION
 
     if (title === "" || amount <= 0 || !Number.isFinite(amount)) {
 
@@ -107,6 +168,7 @@ form.addEventListener("submit", function (event) {
 
 
     // EDIT MODE
+
     if (editingIndex !== null) {
 
         expenses[editingIndex] = expense;
@@ -115,7 +177,9 @@ form.addEventListener("submit", function (event) {
 
     }
 
+
     // ADD MODE
+
     else {
 
         expenses.push(expense);
@@ -126,6 +190,8 @@ form.addEventListener("submit", function (event) {
     displayExpenses();
 
     calculateTotal();
+
+    updateSummary();
 
     form.reset();
 
@@ -151,6 +217,7 @@ expenseList.addEventListener("click", function (event) {
 
 
     // EDIT
+
     if (action === "edit") {
 
         const expense = expenses[index];
@@ -167,6 +234,7 @@ expenseList.addEventListener("click", function (event) {
 
 
     // DELETE
+
     if (action === "delete") {
 
         expenses = expenses.filter(function (expense, expenseIndex) {
@@ -178,6 +246,8 @@ expenseList.addEventListener("click", function (event) {
         displayExpenses();
 
         calculateTotal();
+
+        updateSummary();
 
     }
 
@@ -212,8 +282,28 @@ clearAllButton.addEventListener("click", function () {
 
         calculateTotal();
 
+        updateSummary();
+
         form.reset();
 
     }
 
 });
+
+
+// ==============================
+// SEARCH EXPENSES
+// ==============================
+
+searchInput.addEventListener("input", function () {
+
+    displayExpenses();
+
+});
+
+
+// ==============================
+// INITIAL SUMMARY
+// ==============================
+
+updateSummary();

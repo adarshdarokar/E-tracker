@@ -1,137 +1,242 @@
+/* ==============================
+   RESET
+============================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+/* ==============================
+   VARIABLES
+============================== */
+
 :root {
     --espresso: #2b1b14;
+    --dark-coffee: #352119;
     --coffee: #4b2e22;
     --mocha: #76533f;
     --latte: #b99678;
+
     --cream: #f8f1e8;
     --paper: #fffdf9;
+    --soft: #f4ebe1;
     --sand: #e7d7c6;
     --line: #eadfd3;
+
+    --text: #38271f;
     --muted: #927d6c;
+
+    --shadow: 0 18px 45px rgba(58, 38, 27, 0.09);
 }
+
+
+/* ==============================
+   BODY
+============================== */
 
 body {
     min-height: 100vh;
+
     font-family: Arial, sans-serif;
-    background: var(--cream);
-    color: var(--espresso);
-    padding: 35px 20px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(185, 150, 120, 0.18),
+            transparent 35%
+        ),
+        var(--cream);
+
+    color: var(--text);
+
+    padding: 40px 20px;
 }
+
+
+/* ==============================
+   CONTAINER
+============================== */
 
 .container {
     width: 100%;
     max-width: 820px;
+
     margin: auto;
 }
 
 
-/* HEADER */
+/* ==============================
+   HEADER
+============================== */
 
 h1 {
     display: inline-block;
+
     color: var(--espresso);
-    font-size: 38px;
+
+    font-size: 40px;
     font-weight: 800;
-    letter-spacing: -1.5px;
-    margin-bottom: 28px;
+
+    letter-spacing: -1.8px;
+
+    margin-bottom: 30px;
 }
 
 h1::after {
     content: "";
+
     display: block;
-    width: 42px;
+
+    width: 48px;
     height: 4px;
-    margin-top: 8px;
+
+    margin-top: 9px;
+
     border-radius: 20px;
+
     background: var(--latte);
 }
 
 
-/* BALANCE */
+/* ==============================
+   BALANCE CARD
+============================== */
 
 .balance-card {
     position: relative;
+
     overflow: hidden;
-    min-height: 190px;
-    padding: 32px;
-    margin-bottom: 18px;
-    border-radius: 24px;
-    background: var(--espresso);
+
+    min-height: 205px;
+
+    padding: 34px;
+
+    margin-bottom: 20px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--espresso),
+            var(--dark-coffee)
+        );
+
     color: white;
-    box-shadow: 0 20px 45px rgba(43, 27, 20, 0.18);
+
+    box-shadow:
+        0 24px 55px rgba(43, 27, 20, 0.20);
 }
 
 .balance-card::before {
     content: "";
+
     position: absolute;
-    width: 220px;
-    height: 220px;
-    right: -70px;
-    top: -100px;
+
+    width: 270px;
+    height: 270px;
+
+    right: -90px;
+    top: -125px;
+
     border-radius: 50%;
-    border: 35px solid rgba(255, 255, 255, 0.05);
+
+    border: 38px solid rgba(255, 255, 255, 0.045);
 }
 
 .balance-card::after {
     content: "";
+
     position: absolute;
-    width: 130px;
-    height: 130px;
-    right: 60px;
-    bottom: -85px;
+
+    width: 160px;
+    height: 160px;
+
+    right: 90px;
+    bottom: -105px;
+
     border-radius: 50%;
-    background: rgba(185, 150, 120, 0.15);
+
+    background: rgba(185, 150, 120, 0.13);
 }
 
 .balance-card p {
     position: relative;
+
     z-index: 2;
-    margin-bottom: 12px;
+
+    margin-bottom: 13px;
+
     color: #cdb9a7;
-    font-size: 12px;
+
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+
+    letter-spacing: 2px;
+
     text-transform: uppercase;
 }
 
 .balance-card h2 {
     position: relative;
+
     z-index: 2;
+
     color: #fffaf4;
-    font-size: 44px;
+
+    font-size: 48px;
     font-weight: 700;
-    letter-spacing: -1.5px;
+
+    letter-spacing: -2px;
 }
 
 
-/* FORM */
+/* ==============================
+   EXPENSE FORM
+============================== */
 
 #expenseForm {
     display: grid;
+
     grid-template-columns: 1fr 180px auto;
+
     gap: 10px;
+
     padding: 12px;
+
     margin-bottom: 22px;
+
     border: 1px solid var(--sand);
-    border-radius: 16px;
-    background: rgba(255, 253, 249, 0.8);
+
+    border-radius: 17px;
+
+    background: rgba(255, 253, 249, 0.85);
+
+    box-shadow: 0 8px 25px rgba(76, 51, 37, 0.04);
+
+    backdrop-filter: blur(10px);
 }
 
 #expenseForm input {
     width: 100%;
+
     padding: 14px 16px;
+
     border: 1px solid transparent;
-    border-radius: 10px;
+
+    border-radius: 11px;
+
     outline: none;
-    background: #f4ebe1;
+
+    background: var(--soft);
+
     color: var(--espresso);
+
     font-size: 14px;
+
     transition: 0.2s ease;
 }
 
@@ -141,25 +246,39 @@ h1::after {
 
 #expenseForm input:focus {
     background: var(--paper);
+
     border-color: var(--latte);
-    box-shadow: 0 0 0 3px rgba(185, 150, 120, 0.12);
+
+    box-shadow:
+        0 0 0 3px rgba(185, 150, 120, 0.13);
 }
 
 #expenseForm button {
-    padding: 0 22px;
+    padding: 0 24px;
+
     border: none;
-    border-radius: 10px;
+
+    border-radius: 11px;
+
     background: var(--coffee);
+
     color: #fffaf4;
+
     font-size: 14px;
     font-weight: 700;
+
     cursor: pointer;
+
     transition: 0.2s ease;
 }
 
 #expenseForm button:hover {
     background: var(--espresso);
+
     transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(43, 27, 20, 0.15);
 }
 
 #expenseForm button:active {
@@ -167,38 +286,111 @@ h1::after {
 }
 
 
-/* TRANSACTIONS */
+/* ==============================
+   TRANSACTIONS CARD
+============================== */
 
 .transactions {
-    padding: 26px;
+    padding: 28px;
+
     border: 1px solid var(--sand);
-    border-radius: 20px;
+
+    border-radius: 22px;
+
     background: var(--paper);
-    box-shadow: 0 12px 35px rgba(76, 51, 37, 0.07);
+
+    box-shadow: var(--shadow);
 }
 
 .transactions h2 {
     color: var(--espresso);
+
     font-size: 21px;
-    margin-bottom: 18px;
+    font-weight: 800;
+
+    margin-bottom: 20px;
 }
+
+
+/* ==============================
+   SEARCH
+============================== */
+
+.transactions > input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: #faf4ed;
+
+    color: var(--espresso);
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.transactions > input::placeholder {
+    color: var(--muted);
+}
+
+.transactions > input:focus {
+    background: white;
+
+    border-color: var(--latte);
+
+    box-shadow:
+        0 0 0 3px rgba(185, 150, 120, 0.12);
+}
+
+
+/* ==============================
+   EXPENSE LIST
+============================== */
 
 #expenseList {
     list-style: none;
 }
 
 
-/* TRANSACTION */
+/* ==============================
+   EXPENSE ITEM
+============================== */
 
 #expenseList li {
     display: flex;
+
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+
+    gap: 10px;
+
     padding: 17px 4px;
+
     border-bottom: 1px dashed var(--line);
+
     color: var(--coffee);
+
     font-size: 15px;
+
+    transition: 0.2s ease;
+}
+
+#expenseList li:hover {
+    padding-left: 8px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(244, 235, 225, 0.6),
+        transparent
+    );
 }
 
 #expenseList li:last-child {
@@ -206,23 +398,43 @@ h1::after {
 }
 
 
-/* BUTTONS */
+/* ==============================
+   EXPENSE TEXT
+============================== */
+
+#expenseList li {
+    justify-content: space-between;
+}
+
+
+/* ==============================
+   BUTTON GROUP EFFECT
+============================== */
 
 #expenseList button {
     padding: 7px 12px;
+
     border: 1px solid var(--sand);
+
     border-radius: 8px;
+
     background: #f5ebe1;
+
     color: var(--coffee);
+
     font-size: 12px;
     font-weight: 700;
+
     cursor: pointer;
+
     transition: 0.2s ease;
 }
 
 #expenseList button:hover {
     background: var(--sand);
+
     border-color: var(--latte);
+
     transform: translateY(-1px);
 }
 
@@ -231,47 +443,186 @@ h1::after {
 }
 
 
-/* MOBILE */
+/* ==============================
+   CLEAR ALL BUTTON
+============================== */
+
+.transactions > button {
+    width: 100%;
+
+    padding: 12px 16px;
+
+    margin-top: 18px;
+
+    border: 1px solid var(--sand);
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: var(--coffee);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.transactions > button:hover {
+    background: var(--espresso);
+
+    border-color: var(--espresso);
+
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==============================
+   SUMMARY
+============================== */
+
+.transactions > div {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--line);
+}
+
+.transactions > div p {
+    padding: 13px;
+
+    border-radius: 11px;
+
+    background: #faf4ed;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.transactions > div span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--espresso);
+
+    font-size: 18px;
+
+    letter-spacing: 0;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
 
 @media (max-width: 650px) {
 
     body {
-        padding: 24px 12px;
+        padding: 25px 12px;
     }
 
     h1 {
-        font-size: 30px;
-        margin-bottom: 22px;
+        font-size: 31px;
+
+        margin-bottom: 23px;
     }
 
     .balance-card {
-        min-height: 165px;
-        padding: 25px;
-        border-radius: 20px;
+        min-height: 170px;
+
+        padding: 27px;
+
+        border-radius: 21px;
     }
 
     .balance-card h2 {
-        font-size: 36px;
+        font-size: 38px;
     }
 
     #expenseForm {
         grid-template-columns: 1fr;
+
         padding: 10px;
     }
 
     #expenseForm input,
     #expenseForm button {
         width: 100%;
+
         min-height: 46px;
     }
 
     .transactions {
         padding: 20px;
-        border-radius: 18px;
+
+        border-radius: 19px;
+    }
+
+    .transactions h2 {
+        font-size: 19px;
     }
 
     #expenseList li {
         align-items: flex-start;
-        padding: 15px 0;
+
+        flex-wrap: wrap;
+
+        padding: 16px 0;
     }
+
+    #expenseList li button {
+        padding: 7px 10px;
+    }
+
+    .transactions > div {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==============================
+   SMALL MOBILE
+============================== */
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .balance-card {
+        padding: 23px;
+    }
+
+    .balance-card h2 {
+        font-size: 34px;
+    }
+
+    .transactions {
+        padding: 17px;
+    }
+
 }
